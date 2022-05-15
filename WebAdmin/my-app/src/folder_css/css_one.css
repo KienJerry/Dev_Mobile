@@ -1,0 +1,51 @@
+.CSS-Tab{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #000000;
+}
+li a {
+    display: block;
+    color: rgb(255, 255, 255);
+    padding: 20px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #04AA6D;
+    color: rgb(255, 255, 255);
+}
+
+li a:hover:not(.active) {
+    background-color: rgb(255, 128, 0);
+    color: white;
+}
+
+ul {
+    border: 1px solid #555;
+}
+
+li {
+    text-align: center;
+    border-bottom: 1px solid #555;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+.ABC{
+    background-color: #555;
+    margin-left:230px;
+    margin-top: -740px;
+    list-style-type: none;
+    padding-bottom: 100;
+    width: 85%;
+    height: 100%; 
+    overflow: auto; 
+}
+.background{
+    background-color: #3c3e3d;
+    padding-bottom: 1%;
+}

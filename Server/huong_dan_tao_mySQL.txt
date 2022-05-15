@@ -1,0 +1,75 @@
+-----------------Tạo thư mục và local server------------------<Link tài liệu https://www.w3schools.com/nodejs/nodejs_get_started.asp>
+B1 : Tạo thư mục tên server.js
+
+B2 : Copy dòng lệnh vào code 
+var http = require('http');
+
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.end('Hello World!');
+}).listen(8080);
+
+B3: Vào cmd  chạy G:\DaNenTang\React_Native_CLI\Server>   sau đó gõ node server
+
+B4 : Lên gg coppy dòng lệnh http: // localhost: 8080 lên chạy thử . Nếu có chữ Hello World thì Oke
+
+
+
+-------------------Kết nối với expressjs-------------------------------- <https://expressjs.com/en/starter/installing.html>
+B1 : vào cmd chạy trong folder Server :  npm init
+
+-> sẽ có 1 số thông tin cần nhập 
+package name: (server) server  -> nhập name package . như ở kia là server
+version: (1.0.0) 1.0.0         -> nhập số sersion . như ở kia là 1.0.0
+description: saleandsocial      -> nhập desc . Mình nhập luôn tên app
+entry point: (server.js)       -> Phần này enter
+test command:                  -> như trên
+git repository:                -> Như trên
+keywords:                      -> //
+author: kienntpk01531          -> nhập tên  author vào
+license: (ISC)                 -> phần này enter
+
+B2 :   npm install express -- save 
+
+B3 : vào code server dán 
+var express = require('express');
+var app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello World Babe!')
+})
+
+// ERR 404
+app.use(function(req, res, next) {
+    res.status(404);
+    res.send('404: err');
+});
+
+//server
+app.listen(3001, function () {
+    console.log('Example app listening on port 3001! "http://localhost:3001"  ');
+});
+
+B4 : chạy node server    
+B5 : Lên gg coppy dòng lệnh http: // localhost: 3001 lên chạy thử . Nếu có chữ Hello World thì Oke
+
+
+---------------------------kết nối vs mysql -----------<https://www.w3schools.com/nodejs/nodejs_mysql.asp>
+B1 : vào cmd chạy npm install mysql
+B2 : Thêm vào code 
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "yourusername",
+  password: "yourpassword",
+  database:'ten_du_an',
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
+B3 : Chạy node server , nếu có connected là Oke
+
+

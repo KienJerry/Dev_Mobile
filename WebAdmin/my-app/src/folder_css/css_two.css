@@ -1,0 +1,193 @@
+.giao-dien-product{
+    background-color: #555;
+} 
+.Text-Name{
+    color: white;
+    text-align: center;
+    margin-bottom: 2%;
+    margin-top: 20px;
+}
+.button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #fd8300;
+    border: 1;
+    padding: 10px 10px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    border-radius: 5%;
+    margin-left: 0.5%;
+}
+.button1:hover {
+    background-color: #fd8300;
+    color: white;
+}
+.button2 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #0083fd;
+    border: 1;
+    padding: 12px 10px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    border-radius: 5%;
+    margin-left: 0.5%;
+}
+.button2:hover {
+    background-color: #0083fd;
+    color: white;
+}
+.input-search{
+    border: 2px solid red;
+    border-radius: 4px;
+    margin-left: 50%;
+}
+.Text-Color{
+    color: #fd8300;
+}   
+.Text-Color-one{
+    color: #ffecd8;
+}    
+.Input-AddCategory{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}    
+.button3 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #0083fd;
+    border: 1;
+    padding: 8px 50px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    border-radius: 5%;
+    margin-left: 330px;
+}
+.button3:hover {
+    background-color: #0083fd;
+    color: white;
+} 
+.Btn-Add{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.button4 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #fd0000;
+    border: 1;
+    padding: 8px 50px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    border-radius: 5%;
+    margin-left: 820px;
+}
+.button4:hover {
+    background-color: #fd0000;
+    color: white;
+}
+.magin_btn{
+    background-color: white; 
+    color: rgb(254, 0, 0); 
+    border: 2px solid #fd0000;
+    border: 1;
+    margin-left: 25px;
+    padding: 8px 10px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    border-radius: 5%;
+}
+.magin_btn:hover {
+    background-color: #fd0000;
+    color: white;
+}
+.magin_btn_Edit{
+    background-color: white; 
+    color: rgb(255, 119, 0); 
+    border: 2px solid #ff9100;
+    border: 1;
+    padding: 8px 10px;
+    margin-left: 25px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    border-radius: 5%;
+}
+.magin_btn_Edit:hover {
+    background-color: #ff9100;
+    color: white;
+}
+.input-search-one{
+    border: 2px solid red;
+    border-radius: 4px;
+    margin-left: 50%;
+    padding: 3px 50px;
+}
+.btn-search{
+    background-color: #ffffff;
+    color: rgb(255, 0, 0); 
+    border: 2px solid rgba(0, 172, 20, 0.842)
+}
+.btn-search:hover {
+    background-color: rgba(0, 172, 20, 0.842); 
+    color: white;
+}
+.input-search-one{
+    border: 2px solid red;
+    border-radius: 4px;
+    margin-left: 35%;
+}
+.row-center-add-product{
+    text-align: center;
+    margin-left: 150px;
+}
+.button5 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #0083fd;
+    border: 1;
+    padding: 8px 50px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    border-radius: 5%;
+}
+.button5:hover {
+    background-color: #0083fd;
+    color: white;
+}
+.button6 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #0083fd;
+    border: 1;
+    padding: 12px 10px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    border-radius: 5%;
+    margin-left: 35px;
+    margin-top: 5px;
+}
+.button6:hover {
+    background-color: #0083fd;
+    color: white;
+}
+.Text-Name-one{
+    color: rgb(183, 255, 139);
+    text-align: center;
+    margin-bottom: 2%;
+    margin-top: 20px;
+}
+.Text-Name-two{
+    color: rgb(254, 250, 47);
+    margin: 10px;
+    margin-top: 40px;
+}
+.Text-Name-one1{
+    color: white;
+    margin: 20px;
+}
