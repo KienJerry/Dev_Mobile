@@ -1,26 +1,28 @@
 import React , {useState , useEffect} from 'react';
-import { TextInput, View ,Image , StatusBar , StyleSheet , Text , FlatList , Dimensions, Animated } from 'react-native';
+import { TextInput, View ,Image , StatusBar , StyleSheet , Text , FlatList , TouchableOpacity, ActivityIndicator } from 'react-native';
 import { ScrollView } from 'react-native-virtualized-view';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Swiper from "react-native-swiper";
+import {Rating} from "react-native-ratings"
 
-const api = "http://192.168.250.113:3001/"
+const api = "http://10.22.196.167:3001/"
 
 let timer = () => {};
 //Mục Giá Sốc Hôm nay
 const MyTime = () => {
-  const [CountDownTime, setCountDownTime] = useState(99);
+  const [CountDownTime, setCountDownTime] = useState(10);
   const [listProductHot , SetListProductHot] = useState([]);
+
   const [abcd , abc] = useState([]);
 
   const startTimer = () => {
       timer = setTimeout(async() => {
         //Reset Thời Gian
             const reset = () => {
-              setCountDownTime(99);
+              setCountDownTime(10);
             }
           
-            //Check thời gian nhỏ hơn or bằng 0 
+            //Check thời gian <= 0 thì sẽ ramdom lại list sản phẩm
           if(CountDownTime <= 0){
               clearTimeout(timer);
               var RandomNumber = Math.floor(Math.random() * 5) + 1 ;
@@ -41,7 +43,7 @@ const MyTime = () => {
                 
                 SetListProductHot((json));
               } catch (error) {
-                console.error(error);
+                console.error("Không có kết nối Server");
               }
               return reset();
           }
@@ -104,6 +106,8 @@ const Products = ({ navigation }) => {
   const [DanhMuc , SetDanhMuc] = useState([]);
   const [ListThuongHieu , SetListThuongHieu] = useState([]);
   const [ListProduct_one , SetListProduct_one] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [add_Loading_Data, setadd_Loading_Data] = useState(1);
 
 
 // code gọi Danh Mục Sản Phẩm
@@ -131,10 +135,13 @@ const Products = ({ navigation }) => {
 
   //code gọi list Sản Phẩm
   const ListProduct = async () => {
+    setLoading(true);
     try {
-      const response = await fetch(api + "sanpham/1");
+      const response = await fetch(api + "sanpham/" + add_Loading_Data);
       const json = await response.json();
-      SetListProduct_one((json));
+      setadd_Loading_Data(add_Loading_Data + 1);
+      SetListProduct_one([...ListProduct_one,...(json)]);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -175,11 +182,44 @@ const Products = ({ navigation }) => {
     api + 'images/homnaycogihot2.png',
   ];
 
+  const Data_Goi_Y = [
+    {
+      id: 1 ,
+      name : "Dành Cho Bạn",
+      img : api + "images/add-user.png"
+    },
+    {
+      id: 2 ,
+      name : "Deal Siêu Hot",
+      img : api + "images/fire.png"
+    },
+    {
+      id: 3 ,
+      name : "Mua 1 tặng nhiều",
+      img : api + "images/promotional-items.png"
+    },
+    {
+      id: 4 ,
+      name : "Rẻ vô đối",
+      img : api + "images/saving.png"
+    },
+    {
+      id: 5 ,
+      name : "Săn Sales",
+      img : api + "images/sales.png"
+    },
+    {
+      id: 6 ,
+      name : "Hàng mới",
+      img : api + "images/new.png"
+    },
+  ]
+
   useEffect(() => {
     getCategory();
     ListProduct_category();
     ListProduct();
-  }, []);
+  },[]);
 
   return (
     <View style={{alignItems: "center" }}>
@@ -212,7 +252,7 @@ const Products = ({ navigation }) => {
                     )}
               />  
           </View>
-          <Icon name="grid-view" size={25} color ="white"></Icon>
+          <Icon style={{margin:7}} name="grid-view" size={25} color ="white"></Icon>
         </View>
         <View style={{ width: '100%' , height : 150}}>
           <Swiper autoplay
@@ -265,14 +305,14 @@ const Products = ({ navigation }) => {
                     data={ListThuongHieu}
                     keyExtractor={item => item.idsanpham}
                     renderItem={({ item }) => (
-                        <View style={{elevation: 3 , width : 120 , margin : 10 , borderRadius : 5}}>
+                        <View style={{elevation: 2 , width : 120 , margin : 10 , borderRadius : 1}}>
                           <View style={{marginLeft:10 , marginTop: 20}}>
                               <Image
                                 style={{ width: 105, height: 70}}
                                 source={{ uri: api + "images/" + item.img }}
                               />
                           </View>
-                          <View style={{flex: 1 , width:'90%' , marginLeft:'5%' , backgroundColor:'#f3fdfc' , borderTopLeftRadius: 40, borderTopRightRadius:40 , marginTop : 25}}>
+                          <View style={styles.thuonghieunoitieng_container_name}>
                             <View style={{alignItems: "center" , marginTop : -10}}>
                                <Text style={{fontWeight:'800', fontSize : 18, color : '#484848'}}>{item.idthuonghieu}</Text>
                                <Text style={styles.thuonghieunoitiengxuatxu}>{item.xuatxuthuonghieu}</Text>
@@ -332,68 +372,31 @@ const Products = ({ navigation }) => {
             </View>
             <View style={{ alignItems: "center", justifyContent: "center", borderRadius : 100}}>
               <View style={[{ width: '96%' , height : 50 , flexDirection: 'row', backgroundColor: '#ffe9e9' }]}>
-              <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
-                    <View style={styles.styles_danh_cho_ban}>
-                            <View style={{width: 16 , height: 16 }}>
+              <FlatList         
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    data={Data_Goi_Y}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item ,index}) => (
+                      <View style={styles.styles_danh_cho_ban} key = {index}>
+                           <View style={{width: 16 , height: 16 }}>
                                 <Image
                                   style={{flex : 1}}
-                                  source={require('../../../../image_folder/add-user.png')}
+                                  source={{ uri: item.img }}
                                 />
                             </View>
-                            <Text style={styles.texthomnaycogihot_three}>Dành Cho Bạn</Text>
-                    </View>
-                    <View style={styles.styles_deal_sieu_hot}>
-                            <View style={{width: 16 , height: 16 }}>
-                                <Image
-                                  style={{flex : 1}}
-                                  source={require('../../../../image_folder/fire.png')}
-                                />
-                            </View>
-                            <Text style={styles.texthomnaycogihot_three}>Deal Siêu Hot</Text>
-                    </View>
-                    <View style={styles.styles_mua_1_tang_nhieu}>
-                            <View style={{width: 16 , height: 16 }}>
-                                <Image
-                                  style={{flex : 1}}
-                                  source={require('../../../../image_folder/promotional-items.png')}
-                                />
-                            </View>
-                            <Text style={styles.texthomnaycogihot_three}>Mua 1 tặng nhiều</Text>
-                    </View>
-                    <View style={styles.styles_re_vo_doi}>
-                            <View style={{width: 16 , height: 16 }}>
-                                <Image
-                                  style={{flex : 1}}
-                                  source={require('../../../../image_folder/saving.png')}
-                                />
-                            </View>
-                            <Text style={styles.texthomnaycogihot_three}>Rẻ vô đối</Text>
-                    </View>
-                    <View style={styles.styles_san_sale}>
-                            <View style={{width: 16 , height: 16 }}>
-                                <Image
-                                  style={{flex : 1}}
-                                  source={require('../../../../image_folder/sales.png')}
-                                />
-                            </View>
-                            <Text style={styles.texthomnaycogihot_three}>Săn Sale</Text>
-                    </View>
-                    <View style={styles.styles_deal_sieu_hot}>
-                            <View style={{width: 16 , height: 16 }}>
-                                <Image
-                                  style={{flex : 1}}
-                                  source={require('../../../../image_folder/new.png')}
-                                />
-                            </View>
-                            <Text style={styles.texthomnaycogihot_three}>Hàng mới</Text>
-                    </View>
-                </ScrollView>
+                            <Text style={styles.texthomnaycogihot_three}>{item.name}</Text>
+                      </View>
+                  
+                    )}
+              />
               </View>
             </View>
               <ScrollView>
                   <View style={{flex : 1 , marginTop: 5}}>
                         <FlatList 
                                 numColumns={2}
+                                initialNumToRender={10}
                                 showsVerticalScrollIndicator={false}
                                 data={ListProduct_one}
                                 keyExtractor={item => item.idsanpham}
@@ -404,10 +407,33 @@ const Products = ({ navigation }) => {
                                                 style={{ width: 105 , height: 70}}
                                                 source={{ uri: api + "images/" + item.img }}
                                               />
+                                          </View>                                      
+                                          <Text numberOfLines={2}>{item.tensanpham}</Text>
+                                          <View style={{flexDirection:'row'}}>
+                                            <Rating 
+                                                type='star'
+                                                ratingCount={5}
+                                                imageSize={14}
+                                                defaultRating = {5}
+                                            />
+                                            <Text>  |  Còn lại  : {item.soluongsanpham}</Text>
+                                          </View>
+                                          <View style={{flexDirection: 'row',   }}>
+                                            <Text style={{color: 'red', fontWeight:'bold'}}>{item.giamoi.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")} đ</Text>                                         
                                           </View>
                                     </View>
                                 )}
                           />  
+                            <View style={styles.footer}>
+                              <TouchableOpacity
+                                activeOpacity={0.9}
+                                onPress={ListProduct}>
+                                <Text style={styles.btnText}>Xem thêm...</Text>
+                                {loading ? (
+                                  <ActivityIndicator color="white" style={{marginLeft: 8 , color: 'orange'}} />
+                                ) : null}
+                              </TouchableOpacity>
+                            </View>
                   </View>
               </ScrollView>
            </View>
@@ -555,10 +581,10 @@ const styles = StyleSheet.create({
     marginTop : 25
   },
   container_item_giasochomnay_slider:{
-    elevation: 3 , 
+    elevation: 2 , 
     width : 120 , 
     margin : 10 , 
-    borderRadius : 5
+    borderRadius : 2
   },
   thuonghieunoitieng_container:{
     height:40, 
@@ -610,7 +636,8 @@ const styles = StyleSheet.create({
     borderColor : '#5de6fe' , 
     borderWidth: 1 , 
     alignItems: 'center' ,
-    justifyContent : 'center' 
+    justifyContent : 'center' ,
+    marginRight : 2, 
   },
   styles_deal_sieu_hot:{
     height : '100%' , 
@@ -666,7 +693,27 @@ const styles = StyleSheet.create({
     borderWidth: 1 , 
     alignItems: 'center' ,
     justifyContent : 'center'
-  }
+  },
+  thuonghieunoitieng_container_name:{
+    flex: 1 , 
+    width:'90%' , 
+    marginLeft:'5%' , 
+    backgroundColor:'#f3fdfc' , 
+    borderTopLeftRadius: 40, 
+    borderTopRightRadius:40 , 
+    marginTop : 25
+  },
+  footer: {
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  btnText: {
+    color: 'orange',
+    fontSize: 15,
+    textAlign: 'center',
+  },
   
 
 })

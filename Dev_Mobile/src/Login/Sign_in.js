@@ -5,7 +5,7 @@ import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-ha
 import { SocialIcon } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const api = "http://192.168.250.113:3001/"
+const api = "http://10.22.196.167:3001/"
 const SignIn = ({ navigation }) => {
     const [passdangnhap, onChangepassdangnhap] = useState("");
     const [numberPhone, setnumberPhone] = useState("");
@@ -93,7 +93,12 @@ const SignIn = ({ navigation }) => {
                         const json = await response.json();
                           //phân quyền
                         if(json.map( check =>(check.phanquyen)) == "9999"){
-                            Alert.alert("Admin","Vào màn hình ADMIN(Đang Update)")
+                            navigation.navigate("Admin");
+                            ToastAndroid.showWithGravity(
+                                "Trang Admin !",
+                                ToastAndroid.SHORT,
+                                ToastAndroid.BOTTOM
+                              );
                             return;
                             //ban tài khoản
                         }if(json.map( check =>(check.khoa)) == "1"){
@@ -206,7 +211,7 @@ const SignIn = ({ navigation }) => {
 
                      <View style={{flexDirection: "row" , justifyContent: "center"}}>
                         <SocialIcon type='google' />
-                        <SocialIcon type='instagram'/>
+                        <SocialIcon onPress={() => navigation.navigate('Admin')} type='instagram'/>
                         <SocialIcon type='facebook'/>
                      </View>
 

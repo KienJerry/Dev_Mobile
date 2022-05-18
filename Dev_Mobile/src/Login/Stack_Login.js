@@ -6,6 +6,7 @@ import Signin from './Sign_in';
 import Signpup from './Sign_up';
 import OTP from './OTP';
 import DrawerNa from '../App_Sale/Drawer_Navigation/StackNavigation';
+import Admin from '../App_Sale/Drawer_Navigation/StackNavigation_Admin'
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ export default function MyStack() {
       <Stack.Screen name="Signup" component={Signpup} />
       <Stack.Screen name="Drawer" component={DrawerNa} />
       <Stack.Screen name="OTP" component={OTP} />
+      <Stack.Screen name="Admin" component={Admin} />
     </Stack.Navigator>
   );
 }

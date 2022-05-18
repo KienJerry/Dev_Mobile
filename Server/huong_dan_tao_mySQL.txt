@@ -73,3 +73,6 @@ con.connect(function(err) {
 B3 : Chạy node server , nếu có connected là Oke
 
 
+ Vậy cơ bản là xong con server , viết vào để có mục đích sau này làm ứng dụng khác thì k tốn thời gian search
+
+
