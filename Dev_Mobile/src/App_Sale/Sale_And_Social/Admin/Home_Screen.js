@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, View , StatusBar , StyleSheet , TouchableOpacity , Image , FlatList} from 'react-native';
+import { Text, View , StatusBar , StyleSheet , TouchableOpacity , Image , FlatList, Alert} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const api = "http://10.22.196.167:3001/"
+const api = "http://192.168.250.113:3001/"
 const Home_Admin = ({ navigation }) => {
   const Data =[
     {
@@ -46,7 +46,14 @@ const Home_Admin = ({ navigation }) => {
       name : 'Tin nhắn',
       img : api + "images/6.png",
       stack : 'Chat'
+    },
+    {
+      id : 8,
+      name : 'Admin',
+      img : api + "images/14.png",
+      stack : 'Admin'
     }
+    
   ]
   return (
     <View style={{ flex: 1}}>

@@ -5,7 +5,7 @@ import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-ha
 import { SocialIcon } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const api = "http://10.22.196.167:3001/"
+const api = "http://192.168.250.113:3001/"
 const SignIn = ({ navigation }) => {
     const [passdangnhap, onChangepassdangnhap] = useState("");
     const [numberPhone, setnumberPhone] = useState("");
@@ -93,13 +93,25 @@ const SignIn = ({ navigation }) => {
                         const json = await response.json();
                           //phân quyền
                         if(json.map( check =>(check.phanquyen)) == "9999"){
-                            navigation.navigate("Admin");
+                             //check lưu tài khoản Admin
+                             if (isSelected === true) {
+                                await AsyncStorage.setItem("luutaikhoanAdmin", numberPhone);
+                                navigation.navigate("Admin");
                             ToastAndroid.showWithGravity(
                                 "Trang Admin !",
                                 ToastAndroid.SHORT,
                                 ToastAndroid.BOTTOM
                               );
                             return;
+                            } else {
+                                navigation.navigate("Admin");
+                            ToastAndroid.showWithGravity(
+                                "Trang Admin !",
+                                ToastAndroid.SHORT,
+                                ToastAndroid.BOTTOM
+                              );
+                            return;
+                            }
                             //ban tài khoản
                         }if(json.map( check =>(check.khoa)) == "1"){
                             Alert.alert(

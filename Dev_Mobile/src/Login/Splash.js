@@ -7,8 +7,11 @@ const YourApp = ({ navigation }) => {
     //Check lưu tài khoản
     const tokenlogin = async() => {
       const value = await AsyncStorage.getItem('luutaikhoan')
+      const valueAdmin = await AsyncStorage.getItem('luutaikhoanAdmin')
       if (value !== null) {
           navigation.navigate('Drawer')  
+      }if (valueAdmin !== null) {
+          navigation.navigate('Admin')  
       }else{
         navigation.navigate('Signin')
       }
