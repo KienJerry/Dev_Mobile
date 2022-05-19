@@ -1,14 +1,14 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const Them_DanhMuc = () => {
+const YourApp = () => {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>
-       Thêm  Danh mục sản phẩm! 🎉
+        Nhắn tin! 🎉
       </Text>
     </View>
   );
 }
 
-export default Them_DanhMuc;
+export default YourApp;

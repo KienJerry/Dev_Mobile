@@ -245,7 +245,7 @@ app.post('/addxuatxu', function (req, res) {
       con.query(sql , function(err, result, fields){
         if(err) throw err;
         if(result.affectedRows == 1){
-          res.send('ok');
+          res.send("ok");
         }
       });
 })
