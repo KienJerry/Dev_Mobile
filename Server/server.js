@@ -264,8 +264,8 @@ app.post('/editxuatxu/editid', function(req, res){
   var sql = "UPDATE xuatxu SET noixuatxu = ('"+req.body.name_category+"') where idxuatxu = ("+req.body.myid+")";
   con.query(sql, function(err, result, fields){
     if(err) throw err;
-    if(result =='okedit'){
-      result.send('okedit');
+    if(result.affectedRows == 1){
+      res.send("sua_thanh_cong");
     }
   });
 })
@@ -274,8 +274,8 @@ app.post('/deletexuatxu', function(req, res){
   var sql = "delete from xuatxu where idxuatxu = ("+req.body.myid+")";
   con.query(sql, function(err, result, fields){
     if(err) throw err;
-    if(result =='okdelete'){
-      result.send('okdelete');
+    if(result.affectedRows == 1){
+      res.send("xoa_thanh_cong");
     }
   });
 })

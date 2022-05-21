@@ -10,6 +10,7 @@ MERGED from [com.facebook.flipper:flipper-network-plugin:0.125.0] C:\Users\Admin
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.125.0] C:\Users\Admin\.gradle\caches\transforms-3\df731ac58fe0112a493f9730ba0671c1\transformed\jetified-flipper-fresco-plugin-0.125.0\AndroidManifest.xml:8:1-15:12
 MERGED from [:react-native-async-storage_async-storage] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\@react-native-async-storage\async-storage\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-community_checkbox] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\@react-native-community\checkbox\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-community_picker] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\@react-native-community\picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:lottie-react-native] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\lottie-react-native\src\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-gesture-handler] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-image-picker] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-21:12
@@ -183,6 +184,8 @@ MERGED from [:react-native-async-storage_async-storage] F:\DaNenTang\React_Nativ
 MERGED from [:react-native-async-storage_async-storage] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\@react-native-async-storage\async-storage\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-community_checkbox] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\@react-native-community\checkbox\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-community_checkbox] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\@react-native-community\checkbox\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-community_picker] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\@react-native-community\picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-community_picker] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\@react-native-community\picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:lottie-react-native] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\lottie-react-native\src\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:lottie-react-native] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\lottie-react-native\src\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-gesture-handler] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
