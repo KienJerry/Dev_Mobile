@@ -1,57 +1,76 @@
-import React, { useState } from "react";
-import RNPickerSelect from "react-native-picker-select";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from 'react';
+import { Text, View ,StyleSheet, TouchableOpacity , TextInput} from 'react-native';
+import Icon from "react-native-vector-icons/MaterialIcons";
 
-export default function App () {
-    const [ language, setLanguage ] = useState("");
-    return (
-        <View style={styles.container}>
-  <Text>Hello World!</Text>
-  <RNPickerSelect
-      onValueChange={(value) => console.log(value)}
-      useNativeAndroidPickerStyle={false}
-      placeholder={{ label: "Select your favourite language", value: null }}
-      items={[
-          { label: "JavaScript", value: "JavaScript" },
-          { label: "TypeScript", value: "TypeScript" },
-          { label: "Python", value: "Python" },
-          { label: "Java", value: "Java" },
-          { label: "C++", value: "C++" },
-          { label: "C", value: "C" },
-      ]}
-  />
-</View>
-    );
+const ThuongHieu = () => {
+  const [hideSearch , setHideSearch] = useState(false);
+
+  return (
+    <View style={{ flex: 1, alignItems: "center" }}>
+      <View style={styles.background}>
+        <View style={styles.background_top}>
+          <TouchableOpacity onPress={() => setHideSearch(!hideSearch)}>
+            <Text style={styles.Text_List_Trademark}>Danh Sách Thương Hiệu</Text>  
+          </TouchableOpacity> 
+          {hideSearch ? ( 
+            <View style ={{flexDirection: 'row' ,alignItems: "center" , width: '90%'}}>
+                <TextInput placeholder="Tìm Kiếm ..." style={styles.TextSearch} ></TextInput>
+                <Icon style={{flex : 1}} name="search" size={25} color ="black" ></Icon>
+            </View>
+          ) : null}  
+          {!hideSearch ? (    
+            <View style={{ fontWeight: 'bold', position: 'absolute' , right : 5}}>
+              <TouchableOpacity onPress={() => setHideSearch(!hideSearch)}>
+                  <Icon name="search" size={25} color ="black"></Icon>
+              </TouchableOpacity>             
+            </View>
+          ) : null} 
+        </View>
+      </View>
+      <TouchableOpacity  style={styles.btn_add}>
+        <Icon name='add' size={30} color='orange' />
+      </TouchableOpacity>
+    </View>
+  );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-});
+export default ThuongHieu;
 
-const pickerSelectStyles = StyleSheet.create({
-    inputIOS: {
-        fontSize: 16,
-        paddingVertical: 12,
-        paddingHorizontal: 10,
-        borderWidth: 1,
-        borderColor: 'gray',
-        borderRadius: 4,
-        color: 'black',
-        paddingRight: 30 // to ensure the text is never behind the icon
-    },
-    inputAndroid: {
-        fontSize: 16,
-        paddingHorizontal: 10,
-        paddingVertical: 8,
-        borderWidth: 0.5,
-        borderColor: 'purple',
-        borderRadius: 8,
-        color: 'black',
-        paddingRight: 30 // to ensure the text is never behind the icon
-    }
-});
+const styles = StyleSheet.create({
+  btn_add:{
+    borderWidth: 1,
+    borderColor: 'orange',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 60,
+    height: 60,
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    backgroundColor: '#fff',
+    borderRadius: 100,
+   },
+   background:{
+    width: '98%',
+    top : 1,
+    position: 'absolute',
+   },
+   background_top:{
+    height: 50 , 
+    width : '100%' ,
+    alignItems: "center" ,
+    flexDirection: 'row'
+   },
+   Text_List_Trademark:{
+    marginLeft: 10 , 
+    fontSize:16 , 
+    fontWeight: 'bold',
+   },
+   TextSearch:{
+    backgroundColor: 'white',
+    flex: 1, 
+    margin : 5 , 
+    borderRadius: 5, 
+    borderWidth : 1 
+  }
+})

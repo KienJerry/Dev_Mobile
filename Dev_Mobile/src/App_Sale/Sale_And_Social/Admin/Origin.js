@@ -1,7 +1,6 @@
 import React , { useState , useEffect , useCallback} from 'react';
 import { TouchableOpacity, View, StyleSheet , Modal , Text , TextInput , ToastAndroid , Pressable, Alert, FlatList, RefreshControl , toy } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
-import RN from 'react-native-multiple-select'
 
 const api = "http://192.168.250.113:3001/"
 export default function XuatXu({navigation}) {
@@ -231,15 +230,42 @@ useEffect(() => {
     }
   }
 
+  //Tìm Kiếm
+  const Search = async() => {
+    if(noiXuatXu === null || noiXuatXu ===""){
+      getOrigin();
+      return;
+    }else{
+        try {
+          const response = await fetch(api + "searchxuatxu/" + noiXuatXu);
+          const json = await response.json();
+          if(json == '' || json == null){
+            ToastAndroid.showWithGravity(
+              "Không tìm thấy Xuất Xứ tương ứng",
+              ToastAndroid.SHORT,
+              ToastAndroid.BOTTOM
+          );
+          setOrigin([]);
+          }else{
+            setOrigin(json);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+    }
+  }
+
   return (
     <View style={{ flex: 1,alignItems: "center" }}>
       <View style={styles.backgroundList}>
          <View style={styles.top_backgroundList}>
-            <Text style={{marginLeft: 10 , fontSize:18 , fontWeight: 'bold'}}>Danh Sách Xuất Xứ</Text>
+            <TouchableOpacity onPress={() => setHideSearch(!hideSearch)}>
+                <Text style={{marginLeft: 10 , fontSize:18 , fontWeight: 'bold'}} >Danh Sách Xuất Xứ</Text>
+            </TouchableOpacity> 
             {hideSearch ? (
               <View style ={{flexDirection: 'row' ,alignItems: "center" }}>
-              <TextInput style={{backgroundColor: 'white',flex: 1, margin : 5 , borderRadius: 5, borderWidth : 1 }}></TextInput>
-              <Icon style={{flex : 1}} name="search" size={25} color ="black"></Icon>
+              <TextInput placeholder="Tìm Kiếm ..." style={styles.TextSearch} onChangeText={setNoiXuatXu}></TextInput>
+              <Icon style={{flex : 1}} name="search" size={25} color ="black" onPress={() => Search()}></Icon>
               </View>
             ) : null}           
             {!hideSearch ? (
@@ -437,4 +463,11 @@ modalTextID: {
   fontWeight: '500',
   marginBottom : 20
 },
+TextSearch:{
+  backgroundColor: 'white',
+  flex: 1, 
+  margin : 5 , 
+  borderRadius: 5, 
+  borderWidth : 1 
+}
 })
