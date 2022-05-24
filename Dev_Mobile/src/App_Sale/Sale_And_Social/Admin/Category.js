@@ -1,12 +1,31 @@
 import React , { useState } from 'react';
 import { TouchableOpacity, View, StyleSheet , Modal , Text , TextInput , Alert , Pressable } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
+import RNPickerSelect from "react-native-picker-select";
 
 export default function DanhMuc({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisibleone, setModalVisibleone] = useState(false);
+  const [ language, setLanguage ] = useState("");
+
+  const Data = [
+    { label: "JavaScript", value: "JavaScript" },
+    { label: "TypeScript", value: "TypeScript" },
+    { label: "Python", value: "Python" },
+    { label: "Java", value: "Java" },
+    { label: "C++", value: "C++" },
+    { label: "C", value: "C" },
+    { label: "C", value: "ABC" },
+  ]
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <RNPickerSelect
+      style={{color: 'black' , backgroundColor: 'black'}}
+      onValueChange={(value) => console.log(value)}
+      useNativeAndroidPickerStyle={false}
+      placeholder={{ label: "Select your favourite language", value: 0 }}
+      items={Data}
+       />
           <Modal
             animationType="slide"
             transparent={true}

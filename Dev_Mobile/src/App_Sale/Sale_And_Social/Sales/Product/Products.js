@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Swiper from "react-native-swiper";
 import {Rating} from "react-native-ratings"
 
-const api = "http://192.168.250.113:3001/"
+const api = "http://10.22.198.177:3001/"
 
 let timer = () => {};
 //Mục Giá Sốc Hôm nay
@@ -118,7 +118,7 @@ const Products = ({ navigation }) => {
       SetDanhMuc((json));
       // SetDanhMuc(DanhMuc.concat(json));// concat để gắn dữ liệu cũ của Danh Mục và dữ liệu mới Set Danh Mục
     } catch (error) {
-      console.error(error);
+      console.error('Lỗi ! Không có kết nối mạng "Danh mục Sản Phẩm - Home"')
     }
   };
 

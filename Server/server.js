@@ -183,8 +183,8 @@ app.post('/editthuonghieu/editid', function(req, res){
   var sql = "UPDATE thuonghieu SET tenthuonghieu = ('"+req.body.name_trademark+"'), email =('"+req.body.name_email+"'), diachithuonghieu =('"+req.body.name_address+"') where idthuonghieu = ("+req.body.myid+")";
   con.query(sql, function(err, result, fields){
     if(err) throw err;
-    if(result =='okedit'){
-      result.send('okedit');
+    if(res.affectedRows == 1){
+      res.send('okedit');
     }
   });
 })
@@ -193,8 +193,8 @@ app.post('/deletethuonghieu', function(req, res){
   var sql = "delete from thuonghieu where idthuonghieu = ("+req.body.myid+")";
   con.query(sql, function(err, result, fields){
     if(err) throw err;
-    if(result =='okdelete'){
-      result.send('okdelete');
+    if(result.affectedRows == 1){
+      res.send("xoa_thanh_cong");
     }
   });
 })
