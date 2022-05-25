@@ -4,7 +4,7 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { SocialIcon } from 'react-native-elements';
 
-const api = "http://10.22.198.177:3001/"
+const api = "http://10.22.200.232:3001/"
 const SignUp = ({ navigation }) => {
     const [phoneNumber, setphoneNumber] = useState("");
     const [passWord, setpassWord] = useState("");
@@ -26,8 +26,8 @@ const SignUp = ({ navigation }) => {
     });
 //btn Đăng Ký
     const Check = () => {
-    //    const reg = /^[0]?[0-9\b]+$/;
-        const reg =/(((\+|)84)|0)(3|5|7|8|9)+(0-9)\b/;
+       const reg = /^[0]?[0-9\b]+$/;
+        //const reg =/(((\+|)84)|0)(3|5|7|8|9)+(0-9)\b/;
         if(phoneNumber === null || phoneNumber === ""){
             setErrorsPhone({
                 ...errorsPhone,
@@ -35,7 +35,7 @@ const SignUp = ({ navigation }) => {
                 Alerts : 'Số điện thoại không được để trống'
             })
             return;
-        }if(reg.test(phoneNumber)==false){
+        }if(reg.test(phoneNumber)==0){
             setErrorsPhone({
                 ...errorsPhone,
                 isValiPhone: false,

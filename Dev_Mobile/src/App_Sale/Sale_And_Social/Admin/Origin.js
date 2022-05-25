@@ -2,7 +2,7 @@ import React , { useState , useEffect , useCallback} from 'react';
 import { TouchableOpacity, View, StyleSheet , Modal , Text , TextInput , ToastAndroid , Pressable, Alert, FlatList, RefreshControl , toy } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const api = "http://10.22.198.177:3001/"
+const api = "http://10.22.200.232:3001/"
 export default function XuatXu({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible_Edit, setModalVisible_Edit] = useState(false);
@@ -250,7 +250,7 @@ useEffect(() => {
             setOrigin(json);
           }
         } catch (error) {
-          console.error(error);
+          console.error('Lỗi ! Không thể kết nối');
         }
     }
   }

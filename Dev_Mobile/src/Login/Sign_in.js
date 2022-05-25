@@ -5,7 +5,7 @@ import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-ha
 import { SocialIcon } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const api = "http://10.22.198.177:3001/"
+const api = "http://10.22.200.232:3001/"
 const SignIn = ({ navigation }) => {
     const [passdangnhap, onChangepassdangnhap] = useState("");
     const [numberPhone, setnumberPhone] = useState("");
@@ -20,6 +20,7 @@ const SignIn = ({ navigation }) => {
         Alerts : '',
         isValiPhone : true,
     });
+
 //btn đăng nhập
     const Check = () => {
         const reg = /^[0]?[0-9\b]+$/;
@@ -92,28 +93,7 @@ const SignIn = ({ navigation }) => {
                         const response = await fetch(api + "dangnhap/" + numberPhone);
                         const json = await response.json();
                           //phân quyền
-                        if(json.map( check =>(check.phanquyen)) == "9999"){
-                             //check lưu tài khoản Admin
-                             if (isSelected === true) {
-                                await AsyncStorage.setItem("luutaikhoanAdmin", numberPhone);
-                                navigation.navigate("Admin");
-                            ToastAndroid.showWithGravity(
-                                "Trang Admin !",
-                                ToastAndroid.SHORT,
-                                ToastAndroid.BOTTOM
-                              );
-                            return;
-                            } else {
-                                navigation.navigate("Admin");
-                            ToastAndroid.showWithGravity(
-                                "Trang Admin !",
-                                ToastAndroid.SHORT,
-                                ToastAndroid.BOTTOM
-                              );
-                            return;
-                            }
-                            //ban tài khoản
-                        }if(json.map( check =>(check.khoa)) == "1"){
+                        if(json.map( check =>(check.khoa)) == "1"){
                             Alert.alert(
                                 "Thông báo",
                                 "Tài khoản "+numberPhone+" đã bị khóa ! Liên hệ ADMIN để biết thêm thông tin",
@@ -127,7 +107,28 @@ const SignIn = ({ navigation }) => {
                                 ]
                               );
                               return;
-                        }else{
+                        }if(json.map( check =>(check.phanquyen)) == "9999"){
+                            //check lưu tài khoản Admin
+                            if (isSelected === true) {
+                               await AsyncStorage.setItem("luutaikhoanAdmin", numberPhone);
+                               navigation.navigate("Admin");
+                           ToastAndroid.showWithGravity(
+                               "Trang Admin !",
+                               ToastAndroid.SHORT,
+                               ToastAndroid.BOTTOM
+                             );
+                           return;
+                           } else {
+                               navigation.navigate("Admin");
+                           ToastAndroid.showWithGravity(
+                               "Trang Admin !",
+                               ToastAndroid.SHORT,
+                               ToastAndroid.BOTTOM
+                             );
+                           return;
+                           }
+                           //ban tài khoản
+                       }else{
                              //check lưu tài khoản
                             if (isSelected === true) {
                                 await AsyncStorage.setItem("luutaikhoan", numberPhone);

@@ -12,8 +12,10 @@ const YourApp = ({ navigation }) => {
       const valueAdmin = await AsyncStorage.getItem('luutaikhoanAdmin')
       if (value !== null) {
           navigation.navigate('Drawer')  
+          return;
       }if (valueAdmin !== null) {
           navigation.navigate('Admin')  
+          return;
       }else{
         navigation.navigate('Signin')
       }

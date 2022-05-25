@@ -1,9 +1,9 @@
 import React, { useState , useEffect} from 'react';
 import { Text, View ,StyleSheet, TouchableOpacity , TextInput, FlatList, Modal , Pressable , Alert , ToastAndroid} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
+import axios from 'axios'
 
-
-const api = "http://10.22.198.177:3001/"
+const api = "http://10.22.200.232:3001/"
 const ThuongHieu = () => {
   const [hideSearch , setHideSearch] = useState(false);
   const [showModalAdd, setshowModalAdd] = useState(false);
@@ -310,40 +310,50 @@ const btn_Edit_Trademark = () => {
       ...ValidateTrademark,
       isValiTrademark: true
     })
-    fetch(api + 'editthuonghieu/editid', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name_trademark: thuonghieu,
-        name_email: email,
-        name_address: diachi,
-        myid: id
+    axios.post(api + "editthuonghieu/editid", {
+      name_trademark: thuonghieu,
+      name_email: email,
+      name_address : diachi,
+      myid : id
+    })
+    .then(response =>{
+        if (response.data === 'sua_thanh_cong') {    
+          ToastAndroid.showWithGravity(
+            "Sửa thành công",
+            ToastAndroid.SHORT,
+            ToastAndroid.BOTTOM
+          );
+          getTrademark();
+          setshowModalEdit(!showModalEdit);
+        }
       })
-    })
-    .then((response) => {     //gọi để check res
-      if (response !== 'okedit') {  
-        ToastAndroid.showWithGravity(
-          "Thêm thành công",
-          ToastAndroid.SHORT,
-          ToastAndroid.BOTTOM
-        );
-        setshowModalEdit(!showModalEdit)   //tắt modal
-        getTrademark();     //Gọi lại list data
-      }
-    })
-    .catch((error) => {
-      ToastAndroid.showWithGravity(
-        "Lỗi ! Không thể kết nối",
-        ToastAndroid.SHORT,
-        ToastAndroid.BOTTOM
-    )
-    });
-    return;
+    .catch(error => console.error("Lỗi ! không có kết nối"));
+
   }
 }
+  const Search = async() => {
+    if(thuonghieu === '' || thuonghieu === null){
+      getTrademark();
+      return;
+    }else{
+      try {
+        const response = await fetch(api + "searchthuonghieu/" + thuonghieu);
+        const json = await response.json();
+        if(json == '' || json == null){
+          ToastAndroid.showWithGravity(
+            "Không tìm thấy thương hiệu tương ứng",
+            ToastAndroid.SHORT,
+            ToastAndroid.BOTTOM
+        );
+        setTrademark([]);
+        }else{
+          setTrademark(json);
+        }
+      } catch (error) {
+        console.error('Lỗi ! Không thể kết nối');
+      }
+    }
+  }
 
   return (
     <View style={{ flex: 1, alignItems: "center" }}>
@@ -354,8 +364,8 @@ const btn_Edit_Trademark = () => {
           </TouchableOpacity> 
           {hideSearch ? ( 
             <View style ={{flexDirection: 'row' ,alignItems: "center" , width: '90%'}}>
-                <TextInput placeholder="Tìm Kiếm ..." style={styles.TextSearch} ></TextInput>
-                <Icon style={{flex : 1}} name="search" size={25} color ="black" ></Icon>
+                <TextInput placeholder="Tìm Kiếm ..." style={styles.TextSearch} onChangeText={setthuonghieu} ></TextInput>
+                <Icon style={{flex : 1}} name="search" size={25} color ="black" onPress={() => Search()}></Icon>
             </View>
           ) : null}  
           {!hideSearch ? (    
@@ -413,7 +423,7 @@ const btn_Edit_Trademark = () => {
                             {ValidateTrademark.isValiTrademark ? null : <Text style={{color: 'red' , marginBottom : 15}}>{ValidateTrademark.Alerts}</Text>}
                 <View style={{flexDirection: 'row' , marginTop : 15}}>
                     <Pressable style={[styles.button, styles.buttonClose]}
-                              onPress={() =>setshowModalAdd(!showModalAdd) === setValidateTrademark(!ValidateTrademark)}>
+                              onPress={() =>setshowModalEdit(!showModalEdit) === setValidateTrademark(!ValidateTrademark)}>
                       <Text style={styles.textStyle}>Thoát</Text>
                     </Pressable>
                     <Pressable style={[styles.button, styles.buttonOpen]}

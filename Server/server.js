@@ -183,8 +183,8 @@ app.post('/editthuonghieu/editid', function(req, res){
   var sql = "UPDATE thuonghieu SET tenthuonghieu = ('"+req.body.name_trademark+"'), email =('"+req.body.name_email+"'), diachithuonghieu =('"+req.body.name_address+"') where idthuonghieu = ("+req.body.myid+")";
   con.query(sql, function(err, result, fields){
     if(err) throw err;
-    if(res.affectedRows == 1){
-      res.send('okedit');
+    if(result.affectedRows == 1){
+      res.send("sua_thanh_cong");
     }
   });
 })
@@ -536,6 +536,13 @@ app.post("/dangnhap", (req, res) => {
 app.get('/dangnhap/:nameProduct',function(req, res){
   var ten = req.params.nameProduct
   con.query("SELECT * FROM account where taikhoan = '"+ ten +"' ", function (err, result, fields) {
+    if (err) throw err;
+    res.send(result);
+    });
+});
+//Danh Sách Tài Khoản
+app.get('/list-account', function (req, res) {
+  con.query("SELECT * FROM `account` order by idtaikhoan desc", function (err, result, fields) {
     if (err) throw err;
     res.send(result);
     });
