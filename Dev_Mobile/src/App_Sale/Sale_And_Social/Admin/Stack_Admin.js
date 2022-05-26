@@ -11,6 +11,7 @@ import Origin from './Origin'
 import Chat from './Chat'
 import Admin from './Admin'
 import AddCategory from './Add_Full_Screen/Add_Category'
+import UpdateAccount from './Add_Full_Screen/Update_Account'
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ export default function MyStack() {
       <Stack.Screen name="Origin" component={Origin}  options={{title: 'Quản Lý Xuất Xứ', headerTintColor :'orange'}}/>
       <Stack.Screen name="Admin" component={Admin}  options={{title: 'Trang Admin', headerTintColor :'orange'}}/>
       <Stack.Screen name="AddCategory" component={AddCategory}  options={{headerShown : false}}/>
+      <Stack.Screen name="UpdateAccount" component={UpdateAccount}  options={{headerShown : false}}/>
     </Stack.Navigator>
   );
 }

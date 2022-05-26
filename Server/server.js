@@ -510,7 +510,7 @@ app.post('/deleteimgsp', function(req, res){
      res.send({ success: false });
    } else {
      res.send({ success: true });
-     var sql = "INSERT INTO account ( taikhoan, matkhau, phanquyen, khoa , thoigiandangky) values('" + req.body.tentaikhoans + "' ,  MD5('"+req.body.matkhaus +"'),'" + 0 + "' , '" + 0 + "' , '"+ req.body.date +"' );"
+     var sql = "INSERT INTO account ( taikhoan, matkhau, tien, thoigiandangky) values('" + req.body.tentaikhoans + "' ,  MD5('"+req.body.matkhaus +"'), '"+ 0 +"', '"+ req.body.date +"' );"
      con.query(sql, function (err, result, fields) {
        if (err) throw err;
      });

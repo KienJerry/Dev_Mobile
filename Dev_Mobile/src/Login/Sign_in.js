@@ -5,7 +5,7 @@ import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-ha
 import { SocialIcon } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const api = "http://10.22.200.232:3001/"
+const api = "http://192.168.178.113:3001/"
 const SignIn = ({ navigation }) => {
     const [passdangnhap, onChangepassdangnhap] = useState("");
     const [numberPhone, setnumberPhone] = useState("");

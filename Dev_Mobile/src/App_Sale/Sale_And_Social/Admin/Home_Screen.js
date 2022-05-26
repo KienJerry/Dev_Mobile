@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View , StatusBar , StyleSheet , TouchableOpacity , Image , FlatList, Alert} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const api = "http://10.22.200.232:3001/"
+const api = "http://192.168.178.113:3001/"
 const Home_Admin = ({ navigation }) => {
 
   //List btn

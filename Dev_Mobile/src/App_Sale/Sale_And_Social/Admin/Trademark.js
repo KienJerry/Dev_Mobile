@@ -1,13 +1,14 @@
-import React, { useState , useEffect} from 'react';
-import { Text, View ,StyleSheet, TouchableOpacity , TextInput, FlatList, Modal , Pressable , Alert , ToastAndroid} from 'react-native';
+import React, { useState , useEffect ,useCallback} from 'react';
+import { Text, View ,StyleSheet, TouchableOpacity , TextInput, FlatList, Modal , Pressable , Alert , ToastAndroid , RefreshControl} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import axios from 'axios'
 
-const api = "http://10.22.200.232:3001/"
+const api = "http://192.168.178.113:3001/"
 const ThuongHieu = () => {
   const [hideSearch , setHideSearch] = useState(false);
   const [showModalAdd, setshowModalAdd] = useState(false);
   const [showModalEdit, setshowModalEdit] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [trademark , setTrademark] = useState('');
 
 //State input Thương Hiệu
@@ -20,7 +21,6 @@ const ThuongHieu = () => {
     isValiTrademark : true,
   });
   
-
   //Code gọi list Thương Hiệu
   const getTrademark = async() => {
     try {
@@ -30,6 +30,17 @@ const ThuongHieu = () => {
     } catch (error) {
       console.error("Lỗi ! Không có kết nối mạng");
     }
+  }
+
+  // Code Refresh
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
+  //Get lại API Xuất xứ
+  const wait = (timeout) => {
+    getTrademark();
+    return new Promise(resolve => setTimeout(resolve, timeout));
   }
 
   useEffect(() => {
@@ -389,6 +400,11 @@ const btn_Edit_Trademark = () => {
           <FlatList 
           data={trademark}
           keyExtractor={item => item.idthuonghieu} 
+          refreshControl ={
+            <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}/>
+          }
           renderItem={({item , index}) => (
             <TouchableOpacity onPress={() => Show_Alert(item)}>
             <View key={index} style={styles.flatlist}> 
@@ -520,7 +536,7 @@ const styles = StyleSheet.create({
     borderWidth:  1
   },
   flatlist:{
-    marginBottom: 10 , 
+    marginBottom: 5 , 
     borderWidth : 1 , 
     backgroundColor: 'white'
   },

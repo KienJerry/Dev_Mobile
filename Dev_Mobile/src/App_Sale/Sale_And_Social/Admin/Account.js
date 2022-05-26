@@ -1,17 +1,14 @@
-import React , {useEffect , useState} from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import React , {useEffect , useState ,useCallback} from 'react';
+import { FlatList, StyleSheet, Text, View, RefreshControl, TouchableOpacity } from 'react-native';
 import axios from 'axios'
 
-const api = "http://10.22.200.232:3001/"
-const Account = () => {
+const api = "http://192.168.178.113:3001/"
+const Account = ({navigation}) => {
   const [account , setAccount] = useState([]);
-  const [text , settext] = useState("Chưa cập nhật");
-  const [hideName , setHideName] = useState({
-    text : '',
-    tennguoidung : true,
-  })
+  const [refreshing, setRefreshing] = useState(false);
+
     //Code gọi list Thương Hiệu
-    const getTrademark = async() => {
+    const getAccount = async() => {
       axios.get(api + "list-account")
       .then(response => {
           setAccount(response.data)
@@ -27,8 +24,19 @@ const Account = () => {
       })
     }
 
+      // Code Refresh
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
+  //Get lại API Xuất xứ
+  const wait = (timeout) => {
+    getAccount();
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
+
     useEffect(() => {
-      getTrademark();
+      getAccount();
     },[])
   
   return (
@@ -36,37 +44,47 @@ const Account = () => {
       <View style={styles.background}>
         <FlatList data={account}
                   keyExtractor={item => item.idtaikhoan}
+                  refreshControl ={
+                    <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}/>
+                  }
                   renderItem={({item, index}) =>(
-                    <View key={index} style={styles.flatlist} >
-                      <View style={{flexDirection: 'row'}}>
-                        <Text style={{color:'black'}}>Tên người dùng:
-                            {item.tennguoidung ? null : <Text style={{color: '#ff3c3c' , textDecorationLine: 'underline' , fontSize:13}}> Chưa cập nhật</Text>}                   
-                            {!item.tennguoidung ? null : <Text style={{color: '#0d00ff' , fontWeight:'bold'}}> {item.tennguoidung}</Text>}                   
+                    <TouchableOpacity onPress={() => navigation.navigate("UpdateAccount", {
+                      taikhoan : item.taikhoan
+                    })}>
+                      <View key={index} style={styles.flatlist} >
+                        <View style={{flexDirection: 'row'}}>
+                          <Text style={{color:'black'}}>Tên người dùng:
+                              {item.tennguoidung ? null : <Text style={styles.update}> Chưa cập nhật</Text>}                   
+                              {!item.tennguoidung ? null : <Text style={{color: '#0d00ff' , fontWeight:'bold'}}> {item.tennguoidung}</Text>}                   
+                          </Text>
+                          {!item.phanquyen ? null : <Text style={styles.text}>ADMIN</Text>}
+                        </View>
+                        <View style={{flexDirection: 'row'}}>
+                          <Text style={{color:'black'}}>Tài Khoản : <Text style={{color: '#0d00ff', fontWeight:'bold'}}>{item.taikhoan}</Text></Text>
+                          {!item.khoa ? null : <Text style={styles.lock}>LOCK</Text>}
+                        </View>
+                        <Text style={{color:'black'}}>Năm Sinh:
+                            {item.namsinh ? null : <Text style={styles.update}> Chưa cập nhật</Text>}                   
+                            {!item.namsinh ? null : <Text style={{color: '#0d00ff' , fontWeight:'bold'}}> {item.namsinh}</Text>}                   
                         </Text>
-                        {!item.phanquyen ? null : <Text style={{flex:1 ,position: 'absolute', right : 1 , fontSize: 10 , borderColor: 'red' , borderWidth: 1 , color: 'red' , backgroundColor:'#ffc7c7'}}>ADMIN</Text>}
+                        <Text style={{color:'black'}}>Giới Tính:
+                            {item.gioitinh ? null : <Text style={styles.update}> Chưa cập nhật</Text>}                   
+                            {!item.gioitinh ? null : <Text style={{color: '#0d00ff' , fontWeight:'bold'}}> {item.gioitinh}</Text>}                   
+                        </Text>
+                        <Text style={{color:'black'}}>Địa Chỉ:
+                            {item.diachi ? null : <Text style={styles.update}> Chưa cập nhật</Text>}                   
+                            {!item.diachi ? null : <Text style={{color: '#0d00ff' , fontWeight:'bold'}}> {item.diachi}</Text>}                   
+                        </Text>
+                        <Text style={{color:'black'}}>Thời gian đăng nhập gần đây nhất:
+                            {item.thoigiandangnhap ? null : <Text style={styles.update}> Chưa cập nhật</Text>}                   
+                            {!item.thoigiandangnhap ? null : <Text style={{color: '#0d00ff' , fontWeight:'bold'}}> {item.thoigiandangnhap}</Text>}                   
+                        </Text>
+                        <Text style={{color:'black'}}>Thời gian đăng ký: <Text style={{color: '#0d00ff', fontWeight:'bold'}}>{item.thoigiandangky}</Text></Text>
+                        <Text style={{color:'black'}}>Số Tiền: <Text style={{color: '#0d00ff', fontWeight:'bold'}}>{item.tien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")} VNĐ</Text></Text>
                       </View>
-                      <View style={{flexDirection: 'row'}}>
-                        <Text style={{color:'black'}}>Tài Khoản : <Text style={{color: '#0d00ff', fontWeight:'bold'}}>{item.taikhoan}</Text></Text>
-                        {!item.khoa ? null : <Text style={{flex:1 ,position: 'absolute', right :1 , fontSize: 10 , borderColor: '#0000ff' , borderWidth: 1 , color: '#0000ff' , backgroundColor:'#ffa3ff'}}>LOCK</Text>}
-                      </View>
-                      <Text style={{color:'black'}}>Năm Sinh:
-                          {item.namsinh ? null : <Text style={{color: '#ff3c3c' , textDecorationLine: 'underline' , fontSize:13}}> Chưa cập nhật</Text>}                   
-                          {!item.namsinh ? null : <Text style={{color: '#0d00ff' , fontWeight:'bold'}}> {item.namsinh}</Text>}                   
-                      </Text>
-                      <Text style={{color:'black'}}>Giới Tính:
-                          {item.gioitinh ? null : <Text style={{color: '#ff3c3c' , textDecorationLine: 'underline' , fontSize:13}}> Chưa cập nhật</Text>}                   
-                          {!item.gioitinh ? null : <Text style={{color: '#0d00ff' , fontWeight:'bold'}}> {item.gioitinh}</Text>}                   
-                      </Text>
-                      <Text style={{color:'black'}}>Địa Chỉ:
-                          {item.diachi ? null : <Text style={{color: '#ff3c3c' , textDecorationLine: 'underline' , fontSize:13}}> Chưa cập nhật</Text>}                   
-                          {!item.diachi ? null : <Text style={{color: '#0d00ff' , fontWeight:'bold'}}> {item.diachi}</Text>}                   
-                      </Text>
-                      <Text style={{color:'black'}}>Thời gian đăng nhập gần đây nhất:
-                          {item.thoigiandangnhap ? null : <Text style={{color: '#ff3c3c' , textDecorationLine: 'underline' , fontSize:13}}> Chưa cập nhật</Text>}                   
-                          {!item.thoigiandangnhap ? null : <Text style={{color: '#0d00ff' , fontWeight:'bold'}}> {item.thoigiandangnhap}</Text>}                   
-                      </Text>
-                      <Text style={{color:'black'}}>Thời gian đăng ký: <Text style={{color: '#0d00ff', fontWeight:'bold'}}>{item.thoigiandangky}</Text></Text>
-                    </View>
+                    </TouchableOpacity>
                   )} 
         />
       </View>
@@ -86,6 +104,33 @@ const styles = StyleSheet.create({
   background:{
     width: '98%',
     top : 1,
-    marginTop : 10
    },
+  text:{
+    flex:1 ,
+    position: 'absolute', 
+    right : 1 , 
+    fontSize: 10 , 
+    borderColor: 'red' , 
+    borderWidth: 1 , 
+    color: 'red' , 
+    backgroundColor:'#ffc7c7',
+    fontWeight:'bold'
+  },
+  lock:{
+    flex:1 ,
+    position: 'absolute', 
+    right :1 , 
+    fontSize: 10 , 
+    borderColor: '#0000ff' , 
+    borderWidth: 1 , 
+    color: '#0000ff' , 
+    backgroundColor:'#ffa3ff',
+    fontWeight:'bold',
+    paddingLeft: 2
+  },
+  update:{
+    color: '#ff3c3c' , 
+    textDecorationLine: 'underline' , 
+    fontSize:13
+  }
 })
