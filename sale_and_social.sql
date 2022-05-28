@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 13, 2022 lúc 08:11 PM
+-- Thời gian đã tạo: Th5 27, 2022 lúc 12:00 AM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 7.4.29
 
@@ -32,6 +32,7 @@ CREATE TABLE `account` (
   `taikhoan` varchar(100) NOT NULL,
   `matkhau` varchar(100) NOT NULL,
   `tennguoidung` varchar(200) NOT NULL,
+  `tien` int(11) NOT NULL,
   `phanquyen` varchar(100) NOT NULL,
   `gioitinh` varchar(50) NOT NULL,
   `diachi` varchar(200) NOT NULL,
@@ -45,18 +46,20 @@ CREATE TABLE `account` (
 -- Đang đổ dữ liệu cho bảng `account`
 --
 
-INSERT INTO `account` (`idtaikhoan`, `taikhoan`, `matkhau`, `tennguoidung`, `phanquyen`, `gioitinh`, `diachi`, `namsinh`, `thoigiandangnhap`, `thoigiandangky`, `khoa`) VALUES
-(1, '0352626013', 'e10adc3949ba59abbe56e057f20f883e', '', '9999', '', '', '', '', '10:39:14_05/05/22', '0'),
-(7, '0352626015', 'e10adc3949ba59abbe56e057f20f883e', '', '0', '', '', '', '', 'Sun May  1 22:13:43 2022', '1'),
-(8, '1234567896', '27ff2ffe376b2edcc7c2de309173f0d8', '', '0', '', '', '', '', '22:20:3605/01/22', '0'),
-(9, '7418520963', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', '', '0', '', '', '', '', '22:21:22_05/01/22', '0'),
-(10, '0312347580', 'e10adc3949ba59abbe56e057f20f883e', '', '0', '', '', '', '', '09:54:41_05/05/22', '0'),
-(11, '6523434015', 'e10adc3949ba59abbe56e057f20f883e', '', '0', '', '', '', '', '09:56:33_05/05/22', '0'),
-(12, '6524373012', 'e10adc3949ba59abbe56e057f20f883e', '', '0', '', '', '', '', '09:58:14_05/05/22', '0'),
-(13, '0352626016', 'e10adc3949ba59abbe56e057f20f883e', '', '0', '', '', '', '', '10:29:16_05/05/22', '0'),
-(15, '0352626019', 'e10adc3949ba59abbe56e057f20f883e', '', '0', '', '', '', '', '16:08:53_05/07/22', '0'),
-(16, '0898998299', 'e10adc3949ba59abbe56e057f20f883e', '', '0', '', '', '', '', '09:56:19_05/09/22', '0'),
-(17, '08888888888', 'e10adc3949ba59abbe56e057f20f883e', '', '0', '', '', '', '', '09:56:51_05/09/22', '0');
+INSERT INTO `account` (`idtaikhoan`, `taikhoan`, `matkhau`, `tennguoidung`, `tien`, `phanquyen`, `gioitinh`, `diachi`, `namsinh`, `thoigiandangnhap`, `thoigiandangky`, `khoa`) VALUES
+(1, '0352626013', 'e10adc3949ba59abbe56e057f20f883e', 'ADMIN', 99999999, '9999', 'Nam', 'EAKAR', '2001', '', '10:39:14_05/05/22', ''),
+(7, '0352626015', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyễn Văn A', 0, '9999', '', '', '', '', 'Sun May  1 22:13:43 2022', '1'),
+(8, '1234567896', '27ff2ffe376b2edcc7c2de309173f0d8', '', 0, '', '', '', '', '', '22:20:3605/01/22', ''),
+(9, '7418520963', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', '', 0, '', '', '', '', '', '22:21:22_05/01/22', ''),
+(10, '0312347580', 'e10adc3949ba59abbe56e057f20f883e', '', 0, '', '', '', '', '', '09:54:41_05/05/22', ''),
+(11, '6523434015', 'e10adc3949ba59abbe56e057f20f883e', '', 0, '', '', '', '', '', '09:56:33_05/05/22', ''),
+(12, '6524373012', 'e10adc3949ba59abbe56e057f20f883e', '', 0, '', '', '', '', '', '09:58:14_05/05/22', ''),
+(13, '0352626016', 'e10adc3949ba59abbe56e057f20f883e', '', 0, '', '', '', '', '', '10:29:16_05/05/22', ''),
+(15, '0352626019', 'e10adc3949ba59abbe56e057f20f883e', '', 0, '', '', '', '', '', '16:08:53_05/07/22', ''),
+(16, '0898998299', 'e10adc3949ba59abbe56e057f20f883e', '', 0, '', '', '', '', '', '09:56:19_05/09/22', ''),
+(17, '08888888888', 'e10adc3949ba59abbe56e057f20f883e', '', 0, '', '', '', '', '', '09:56:51_05/09/22', ''),
+(18, '0123456789', 'e10adc3949ba59abbe56e057f20f883e', '', 0, '', '', '', '', '', '11:15:52_05/25/22', ''),
+(19, '0000000000', 'e10adc3949ba59abbe56e057f20f883e', '', 2000000, '', '', '', '', '', '02:04:36_05/27/22', '');
 
 -- --------------------------------------------------------
 
@@ -319,7 +322,9 @@ INSERT INTO `xuatxu` (`idxuatxu`, `noixuatxu`) VALUES
 (11, 'Argentina'),
 (12, 'Kazakhstan'),
 (13, 'Chile'),
-(14, 'Đức');
+(14, 'Đức'),
+(66, 'Áo'),
+(68, 'Campuchia');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -375,7 +380,7 @@ ALTER TABLE `xuatxu`
 -- AUTO_INCREMENT cho bảng `account`
 --
 ALTER TABLE `account`
-  MODIFY `idtaikhoan` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idtaikhoan` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT cho bảng `danhmuc`
@@ -405,13 +410,13 @@ ALTER TABLE `sanpham`
 -- AUTO_INCREMENT cho bảng `thuonghieu`
 --
 ALTER TABLE `thuonghieu`
-  MODIFY `idthuonghieu` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idthuonghieu` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `xuatxu`
 --
 ALTER TABLE `xuatxu`
-  MODIFY `idxuatxu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idxuatxu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

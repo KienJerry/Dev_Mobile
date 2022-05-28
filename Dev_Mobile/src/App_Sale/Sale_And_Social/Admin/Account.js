@@ -51,7 +51,9 @@ const Account = ({navigation}) => {
                   }
                   renderItem={({item, index}) =>(
                     <TouchableOpacity onPress={() => navigation.navigate("UpdateAccount", {
-                      taikhoan : item.taikhoan
+                      taikhoan : item.taikhoan,
+                      khoa : item.khoa,
+                      phanquyen : item.phanquyen,
                     })}>
                       <View key={index} style={styles.flatlist} >
                         <View style={{flexDirection: 'row'}}>
