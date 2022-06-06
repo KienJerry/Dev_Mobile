@@ -1,13 +1,13 @@
 import React , {useEffect , useState ,useCallback} from 'react';
-import { FlatList, StyleSheet, Text, View, RefreshControl, TouchableOpacity } from 'react-native';
+import { FlatList, StyleSheet, Text, View, RefreshControl, TouchableOpacity , Alert , ToastAndroid} from 'react-native';
 import axios from 'axios'
 
-const api = "http://192.168.178.113:3001/"
+const api = "http://10.22.204.106:3001/"
 const Account = ({navigation}) => {
   const [account , setAccount] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
-    //Code gọi list Thương Hiệu
+    //Code gọi list Acconut
     const getAccount = async() => {
       axios.get(api + "list-account")
       .then(response => {
@@ -29,15 +29,134 @@ const Account = ({navigation}) => {
     setRefreshing(true);
     wait(1000).then(() => setRefreshing(false));
   }, []);
-  //Get lại API Xuất xứ
+  //Get lại API tài khoản để reset
   const wait = (timeout) => {
     getAccount();
     return new Promise(resolve => setTimeout(resolve, timeout));
   }
 
-    useEffect(() => {
-      getAccount();
-    },[])
+  useEffect(() => {
+    getAccount();
+  },[]);
+
+  //Show Alert Chức năng
+  const Show_Alert = (item) => {
+    if(item.khoa == 1){     
+      Alert.alert(
+        "Chức năng",
+        "Tài Khoản : " + item.taikhoan,
+        [
+          {
+            text: "Thoát",
+            style: "cancel"
+          },
+          { 
+            text: 'Mở Khoá', 
+            onPress: () => unLock(item)
+          },
+          { 
+            text: "Chi Tiết", 
+            onPress: () => navigation.navigate('UpdateAccount')
+          },
+        ]
+      )
+      return;
+    }else{
+      Alert.alert(
+        "Chức năng",
+        "Tài Khoản : " + item.taikhoan,
+        [
+          {
+            text: "Thoát",
+            style: "cancel"
+          },
+          { 
+            text: 'Khoá', 
+            onPress: () => locks(item)
+          },
+          { 
+            text: "Chi Tiết", 
+            onPress: () => navigation.navigate('UpdateAccount')
+          },
+        ]
+      )
+      return;
+    }
+  }
+
+//Code Mở Khoá
+const unLock = (item) => {
+  Alert.alert(
+    "Cảnh Báo",
+    "Chắc chắn mở khoá tài khoản : " + item.taikhoan + " không ?",
+    [
+      {
+        text: "huỷ",
+        style: "cancel"
+      },
+      { 
+        text: 'Vẫn mở khoá', 
+        onPress: () => sureUnLock()
+      },
+    ]
+  );
+  //Nếu vẫn bấm vào "Vẫn mở khoá" thì sẽ chạy vào hàm này
+  const sureUnLock = () => {
+    axios.post(api + "unLock-account", {
+      myid : item.idtaikhoan,
+      khoa : ""
+    })
+    .then(response =>{
+        if (response.data == 'sua_thanh_cong') {    
+          ToastAndroid.showWithGravity(
+            "Mở tài khoản thành công",
+            ToastAndroid.SHORT,
+            ToastAndroid.BOTTOM
+          );
+          getAccount();
+          return;
+        }
+      })
+    .catch(error => console.error("Lỗi ! không có kết nối"));
+  }
+}
+
+//Code Khoá Tài Khoản 
+const locks = (item) => {
+  Alert.alert(
+    "Cảnh Báo",
+    "Chắc chắn khoá tài khoản : " + item.taikhoan + " ?",
+    [
+      {
+        text: "huỷ",
+        style: "cancel"
+      },
+      { 
+        text: 'Vẫn Khoá', 
+        onPress: () => sureLock()
+      },
+    ]
+  );
+  //Check nếu vẫn bấm "Khoá" thì sẽ chạy vào hàm này
+  const sureLock = () => {
+      axios.post(api + "unLock-account", {
+        myid : item.idtaikhoan,
+        khoa : "1"
+      })
+      .then(response =>{
+          if (response.data == 'sua_thanh_cong') {    
+            ToastAndroid.showWithGravity(
+              "Khoá tài khoản thành công",
+              ToastAndroid.SHORT,
+              ToastAndroid.BOTTOM
+            );
+            getAccount();
+            return;
+          }
+        })
+      .catch(error => console.error("Lỗi ! không có kết nối"));
+  }
+}
   
   return (
     <View style={{flex: 1 ,alignItems: 'center',}}>
@@ -50,11 +169,7 @@ const Account = ({navigation}) => {
                     onRefresh={onRefresh}/>
                   }
                   renderItem={({item, index}) =>(
-                    <TouchableOpacity onPress={() => navigation.navigate("UpdateAccount", {
-                      taikhoan : item.taikhoan,
-                      khoa : item.khoa,
-                      phanquyen : item.phanquyen,
-                    })}>
+                    <TouchableOpacity onPress={() => Show_Alert(item)}>
                       <View key={index} style={styles.flatlist} >
                         <View style={{flexDirection: 'row'}}>
                           <Text style={{color:'black'}}>Tên người dùng:

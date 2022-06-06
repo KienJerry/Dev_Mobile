@@ -557,6 +557,17 @@ app.get('/danhmucsanphamidcha', function (req, res) {
     });
 });
 
+//Mở Khoá tài khoản
+app.post('/unLock-account' , function(req, res){
+  var sql = "UPDATE account SET khoa = ('"+req.body.khoa+"') where idtaikhoan = ("+req.body.myid+")";
+  con.query(sql, function(err, result, fields){
+    if(err) throw err;
+    if(result.affectedRows == 1){
+      res.send("sua_thanh_cong");
+    }
+  });
+})
+
 // ERR 404
 app.use(function(req, res, next) {
     res.status(404);
