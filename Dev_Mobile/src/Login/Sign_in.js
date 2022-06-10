@@ -5,7 +5,7 @@ import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-ha
 import { SocialIcon } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const api = "http://10.22.204.106:3001/"
+const api = "http://192.168.235.113:3001/"
 const SignIn = ({ navigation }) => {
     const [passdangnhap, onChangepassdangnhap] = useState("");
     const [numberPhone, setnumberPhone] = useState("");
@@ -92,7 +92,7 @@ const SignIn = ({ navigation }) => {
                     if (res.success === true) {
                         const response = await fetch(api + "dangnhap/" + numberPhone);
                         const json = await response.json();
-                          //phân quyền
+                          //ban tài khoản
                         if(json.map( check =>(check.khoa)) == "1"){
                             Alert.alert(
                                 "Thông báo",
@@ -127,7 +127,7 @@ const SignIn = ({ navigation }) => {
                              );
                            return;
                            }
-                           //ban tài khoản
+                           //Tai Khoan client
                        }else{
                              //check lưu tài khoản
                             if (isSelected === true) {

@@ -2,7 +2,7 @@ import React , { useState , useEffect , useCallback} from 'react';
 import { TouchableOpacity, View, StyleSheet , Modal , Text , TextInput , ToastAndroid , Pressable, Alert, FlatList, RefreshControl  } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const api = "http://10.22.204.106:3001/"
+const api = "http://192.168.235.113:3001/"
 export default function XuatXu({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible_Edit, setModalVisible_Edit] = useState(false);

@@ -4,7 +4,7 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { SocialIcon } from 'react-native-elements';
 
-const api = "http://10.22.204.106:3001/"
+const api = "http://192.168.235.113:3001/"
 const SignUp = ({ navigation }) => {
     const [phoneNumber, setphoneNumber] = useState("");
     const [passWord, setpassWord] = useState("");
@@ -27,7 +27,6 @@ const SignUp = ({ navigation }) => {
 //btn Đăng Ký
     const Check = () => {
        const reg = /^[0]?[0-9\b]+$/;
-        //const reg =/(((\+|)84)|0)(3|5|7|8|9)+(0-9)\b/;
         if(phoneNumber === null || phoneNumber === ""){
             setErrorsPhone({
                 ...errorsPhone,
