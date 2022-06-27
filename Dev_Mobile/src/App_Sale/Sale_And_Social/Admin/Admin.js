@@ -2,11 +2,11 @@ import React from 'react';
 import { Text, View, TouchableOpacity, Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Admin = () => {
+const Admin = ({navigation}) => {
 
   const logout = async() => {
     await AsyncStorage.removeItem('luutaikhoanAdmin');
-    Alert.alert("Vui lòng thoát app")
+    navigation.navigate('SignIn');
 }
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

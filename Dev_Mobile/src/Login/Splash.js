@@ -1,19 +1,34 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Image, View , StatusBar , LogBox} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ignoreWarnings  from 'ignore-warnings';
+import axios from 'axios';
 
-
+const api = "http://192.168.17.113:3001/"
 const YourApp = ({ navigation }) => {
   setTimeout(() => {
     //Check lưu tài khoản
     const tokenlogin = async() => {
       const value = await AsyncStorage.getItem('luutaikhoan')
       const valueAdmin = await AsyncStorage.getItem('luutaikhoanAdmin')
+      const time = new Date().toLocaleTimeString();
+      const date = new Date().toLocaleDateString();
       if (value !== null) {
+        //hàm cập nhật thời gian đăng nhập gần nhất
+          axios.post( api + "new-login/", {
+            datetime: date + ' ' + time,
+            taikhoan: value
+          })
+          .catch(error => console.log('Lỗi không có kết nối mạng' + error));
           navigation.navigate('Drawer')  
           return;
       }if (valueAdmin !== null) {
+        //hàm cập nhật thời gian đăng nhập gần nhất
+        axios.post( api + "new-login/", {
+          datetime: date + ' ' + time,
+          taikhoan: valueAdmin
+        })
+        .catch(error => console.log('Lỗi không có kết nối mạng' + error));
           navigation.navigate('Admin')  
           return;
       }else{

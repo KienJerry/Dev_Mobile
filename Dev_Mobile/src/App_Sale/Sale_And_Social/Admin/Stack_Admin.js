@@ -12,12 +12,13 @@ import Chat from './Chat'
 import Admin from './Admin'
 import AddCategory from './Add_Full_Screen/Add_Category'
 import UpdateAccount from './Add_Full_Screen/Update_Account'
+import SignIn from '../../../Login/Sign_in'
 
 const Stack = createStackNavigator();
 
 export default function MyStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator >
       <Stack.Screen name="HomeScreen" component={HomeScreen}  options={{title: 'Trang Home' , headerShown : false}}/>
       <Stack.Screen name="Account" component={Account}  options={{title: 'Quản lý tài khoản', headerTintColor :'orange'}}/>
       <Stack.Screen name="Product" component={Product}  options={{title: 'Quản lý Sản Phẩm', headerTintColor :'orange'}}/>
@@ -29,6 +30,7 @@ export default function MyStack() {
       <Stack.Screen name="Admin" component={Admin}  options={{title: 'Trang Admin', headerTintColor :'orange'}}/>
       <Stack.Screen name="AddCategory" component={AddCategory}  options={{headerShown : false}}/>
       <Stack.Screen name="UpdateAccount" component={UpdateAccount}  options={{headerShown : false}}/>
+      <Stack.Screen name="SignIn" component={SignIn}  options={{headerShown : false}}/>
     </Stack.Navigator>
   );
 }

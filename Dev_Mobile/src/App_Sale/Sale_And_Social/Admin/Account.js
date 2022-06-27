@@ -2,7 +2,7 @@ import React , {useEffect , useState ,useCallback} from 'react';
 import { FlatList, StyleSheet, Text, View, RefreshControl, TouchableOpacity , Alert , ToastAndroid} from 'react-native';
 import axios from 'axios'
 
-const api = "http://10.22.211.156:3001/"
+const api = "http://192.168.17.113:3001/"
 const Account = ({navigation}) => {
   const [account , setAccount] = useState([]);
   const [refreshing, setRefreshing] = useState(false);

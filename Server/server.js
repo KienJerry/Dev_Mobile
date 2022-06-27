@@ -540,6 +540,18 @@ app.get('/dangnhap/:nameProduct',function(req, res){
     res.send(result);
     });
 });
+
+// thời gian đăng nhâp
+app.post('/new-login' , function(req, res){
+  var sql = "UPDATE account SET thoigiandangnhap = '"+req.body.datetime+"' where taikhoan = '"+req.body.taikhoan+"'";
+  con.query(sql, function(err, result, fields){
+    if(err) throw err;
+    if(result.affectedRows == 1){
+      res.send("sua_thanh_cong");
+    }
+  });
+})
+
 //Danh Sách Tài Khoản
 app.get('/list-account', function (req, res) {
   con.query("SELECT * FROM `account` order by idtaikhoan desc", function (err, result, fields) {
@@ -571,6 +583,17 @@ app.post('/unLock-account' , function(req, res){
 //Tăng - giảm tiền trong tài khoản
 app.post('/money-account' , function(req, res){
   var sql = "UPDATE account SET tien = ('"+req.body.tien+"') where idtaikhoan = ("+req.body.myid+")";
+  con.query(sql, function(err, result, fields){
+    if(err) throw err;
+    if(result.affectedRows == 1){
+      res.send("sua_thanh_cong");
+    }
+  });
+})
+
+//Phân Quyền tài khoản
+app.post('/admin-account' , function(req, res){
+  var sql = "UPDATE account SET phanquyen = ('"+req.body.phanquyen+"') where idtaikhoan = ("+req.body.myid+")";
   con.query(sql, function(err, result, fields){
     if(err) throw err;
     if(result.affectedRows == 1){

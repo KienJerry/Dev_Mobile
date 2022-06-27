@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Swiper from "react-native-swiper";
 import {Rating} from "react-native-ratings"
 
-const api = "http://192.168.235.113:3001/"
+const api = "http://192.168.17.113:3001/"
 
 let timer = () => {};
 //Mục Giá Sốc Hôm nay

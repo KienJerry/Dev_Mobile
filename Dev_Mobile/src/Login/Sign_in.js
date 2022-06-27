@@ -4,8 +4,9 @@ import CheckBox from '@react-native-community/checkbox';
 import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { SocialIcon } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
-const api = "http://192.168.235.113:3001/"
+const api = "http://192.168.17.113:3001/"
 const SignIn = ({ navigation }) => {
     const [passdangnhap, onChangepassdangnhap] = useState("");
     const [numberPhone, setnumberPhone] = useState("");
@@ -90,8 +91,18 @@ const SignIn = ({ navigation }) => {
                 .then((response) => response.json())
                 .then(async(res) => {
                     if (res.success === true) {
+                        //Hàm lấy thông tin user
                         const response = await fetch(api + "dangnhap/" + numberPhone);
                         const json = await response.json();
+
+                        //Hàm update new login
+                        const time = new Date().toLocaleTimeString();
+                        const date = new Date().toLocaleDateString();
+                        
+                        axios.post( api + "new-login/", {
+                        datetime: date + ' ' + time,
+                        taikhoan: numberPhone
+                        });
                           //ban tài khoản
                         if(json.map( check =>(check.khoa)) == "1"){
                             Alert.alert(

@@ -1,4 +1,8 @@
 ----------Tạo-thư-mục-ReactJS-------<https://reactjs.org/docs/create-a-new-react-app.html>
-B1 : Vào cmd chạy npx create-react-app webadmin
+B1 : Vào cmd chạy npm install -g create-react-app
+B2 : Sau đó chạy create-react-app ten-app
+cd ten-app
+npm start
+
 
 --------Tiếp theo vào react router

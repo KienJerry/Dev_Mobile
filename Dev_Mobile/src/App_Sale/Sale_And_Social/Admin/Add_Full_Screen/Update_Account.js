@@ -1,10 +1,10 @@
 import React, { useState , useEffect } from 'react';
-import { Text, View ,ToastAndroid ,TouchableOpacity ,StyleSheet ,Dimensions, Image, FlatList, TextInput , Modal , Pressable} from 'react-native';
+import { Text, View ,ToastAndroid ,TouchableOpacity ,StyleSheet ,Dimensions, Image, FlatList, TextInput , Modal , Pressable , Alert} from 'react-native';
 import axios from 'axios';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { Menu, MenuItem } from 'react-native-material-menu';
 
-const api = "http:192.168.235.113:3001/"
+const api = "http:192.168.17.113:3001/"
 var deviceWidth = Dimensions.get('window').width * 0.5;
 const UpdateAccount = ({route , navigation}) => {
     const [data , setData] = useState([]);
@@ -142,8 +142,152 @@ const UpdateAccount = ({route , navigation}) => {
         return 0;
   }
 
+//code Khoá - mở khoá tài khoản
+const locks = () => {
+  if(khoa == "1"){
+    Alert.alert(
+      "Cảnh Báo",
+      "Chắc chắn mở khoá tài khoản : " + data[0].taikhoan + " ?",
+      [
+        {
+          text: "huỷ",
+          style: "cancel"
+        },
+        { 
+          text: 'Mở Khoá', 
+          onPress: () => sureLock()
+        },
+      ]
+    );
+    //Check nếu vẫn bấm "Khoá" thì sẽ chạy vào hàm này
+    const sureLock = () => {
+        axios.post(api + "unLock-account", {
+          myid : data[0].idtaikhoan,
+          khoa : ""
+        })
+        .then(response =>{
+            if (response.data == 'sua_thanh_cong') {    
+              ToastAndroid.showWithGravity(
+                "Mở khoá tài khoản thành công",
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+              );
+              getMoney();
+              return;
+            }
+          })
+        .catch(error => console.error("Lỗi ! không có kết nối"));
+    }
+  }else{
+    Alert.alert(
+      "Cảnh Báo",
+      "Chắc chắn khoá tài khoản : " + data[0].taikhoan + " ?",
+      [
+        {
+          text: "huỷ",
+          style: "cancel"
+        },
+        { 
+          text: 'Vẫn Khoá', 
+          onPress: () => sureLock()
+        },
+      ]
+    );
+    //Check nếu vẫn bấm "Khoá" thì sẽ chạy vào hàm này
+    const sureLock = () => {
+        axios.post(api + "unLock-account", {
+          myid : data[0].idtaikhoan,
+          khoa : "1"
+        })
+        .then(response =>{
+            if (response.data == 'sua_thanh_cong') {    
+              ToastAndroid.showWithGravity(
+                "Khoá tài khoản thành công",
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+              );
+              getMoney();
+            }
+          })
+        .catch(error => console.error("Lỗi ! không có kết nối"));
+    }
+  }
+}
+
+//code Cấp - Huỷ Quyền Admin
+const Admin = () => {
+  if(phanquyen == "9999"){
+    Alert.alert(
+      "Cảnh Báo",
+      "Chắc chắn huỷ quyền ADMIN tài khoản : " + data[0].taikhoan + " ?",
+      [
+        {
+          text: "huỷ",
+          style: "cancel"
+        },
+        { 
+          text: ' Đồng Ý', 
+          onPress: () => sureLock()
+        },
+      ]
+    );
+    //Check nếu vẫn bấm "Đồng Ý" thì sẽ chạy vào hàm này
+    const sureLock = () => {
+        axios.post(api + "admin-account", {
+          myid : data[0].idtaikhoan,
+          phanquyen : ""
+        })
+        .then(response =>{
+            if (response.data == 'sua_thanh_cong') {    
+              ToastAndroid.showWithGravity(
+                "Huỷ quyền tài khoản " + data[0].taikhoan + " thành công",
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+              );
+              getMoney();
+              return;
+            }
+          })
+        .catch(error => console.error("Lỗi ! không có kết nối"));
+    }
+  }else{
+    Alert.alert(
+      "Cảnh Báo",
+      "Chắc chắn Cấp quyền ADMIN tài khoản : " + data[0].taikhoan + " ?",
+      [
+        {
+          text: "huỷ",
+          style: "cancel"
+        },
+        { 
+          text: 'Đồng ý', 
+          onPress: () => sureLock()
+        },
+      ]
+    );
+    //Check nếu vẫn bấm "Đồng ý" thì sẽ chạy vào hàm này
+    const sureLock = () => {
+        axios.post(api + "admin-account", {
+          myid : data[0].idtaikhoan,
+          phanquyen : "9999"
+        })
+        .then(response =>{
+            if (response.data == 'sua_thanh_cong') {    
+              ToastAndroid.showWithGravity(
+                "Cấp Quyền tài khoản "+ data[0].taikhoan +" thành công",
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+              );
+              getMoney();
+            }
+          })
+        .catch(error => console.error("Lỗi ! không có kết nối"));
+    }
+  }
+}
+
   return (
-    <View style={{ flex: 1 , backgroundColor: 'white'}}>
+    <View style={{ flex: 1 , backgroundColor: 'white'}} >
         <View style = {styles.container} >
             <Icon size={30} style = {{marginLeft: 10 ,  color: "orange"}} name="chevron-left" onPress={() => navigation.goBack()}/>
             <Text style = {{ fontSize: 20, fontWeight: "bold" , color: "orange"}}onPress={() => navigation.goBack()}>Cập nhật tài khoản</Text>
@@ -152,10 +296,17 @@ const UpdateAccount = ({route , navigation}) => {
                   visible={checkMenu}
                   anchor={ <Icon size={30} color='orange' name="more-vert" onPress={() => setcheckMenu(true)}/>}
                   onRequestClose={() => setcheckMenu(false)}>
-                      <MenuItem onPress={() => setcheckMenu1(true) }>Tiền      ►</MenuItem>
+                      <MenuItem onPress={() => setcheckMenu1(true) }>Tiền     ➤</MenuItem>
                       <MenuItem onPress={() => setcheckMenu(false)}>Lịch sử mua hàng</MenuItem>
-                      <MenuItem onPress={() => setcheckMenu(false)}>Khoá</MenuItem>
-                      <MenuItem onPress={() => setcheckMenu(false)}>Cấp quyền Admin</MenuItem>
+                      <MenuItem onPress={() => locks()}>
+                            {khoa ? null : <Text> Khoá</Text>}                   
+                            {!khoa ? null : <Text>Mở Khoá</Text>} 
+                      </MenuItem>
+                      <MenuItem onPress={() => Admin()}>
+                             {!phanquyen ? null : <Text>Huỷ quyền Admin</Text>}
+                             {phanquyen ? null : <Text>Cấp quyền Admin</Text>}
+                      </MenuItem>
+                      <MenuItem onPress={() => navigation.navigate('Account')}>Xong</MenuItem>
                 </Menu>  
             </View>
             <View style={styles.more1}>
@@ -199,8 +350,8 @@ const UpdateAccount = ({route , navigation}) => {
                            <Text style={{marginBottom : 10}}>Số tiền trong tài khoản : <Text style={{color: 'blue'}}>{item.tien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")} VNĐ</Text></Text>
                            <Text style={{marginBottom : 10}}>Thời gian đăng ký : {item.thoigiandangky}</Text>
                            <Text style={{marginBottom : 10}}>Tình trạng : 
-                              {!khoa ? null : <Text style={{color:'red'}}>Khoá</Text>}
-                              {khoa ? null : <Text> Bình thường</Text>}
+                              {!item.khoa  ? null : <Text style={{color:'red'}}>Khoá</Text>}
+                              {item.khoa  ? null : <Text> Bình thường</Text>}
                            </Text>
                         </View>
                     )} 

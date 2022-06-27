@@ -16,6 +16,7 @@ MERGED from [:react-native-gesture-handler] F:\DaNenTang\React_Native_CLI\Dev_Mo
 MERGED from [:react-native-image-picker] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-21:12
 MERGED from [:react-native-safe-area-context] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-screens] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-svg] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-svg\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-vector-icons] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-vector-icons\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.react:react-native:0.68.1] C:\Users\Admin\.gradle\caches\transforms-3\3870dbabc2a1410386e20fa69567ecf9\transformed\jetified-react-native-0.68.1\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Admin\.gradle\caches\transforms-3\6ca4772dc16ee0aa26e0cc717aaeee42\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:17:1-22:12
@@ -196,6 +197,8 @@ MERGED from [:react-native-safe-area-context] F:\DaNenTang\React_Native_CLI\Dev_
 MERGED from [:react-native-safe-area-context] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-screens] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-screens] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-svg] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-svg\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-svg] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-svg\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-vector-icons] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-vector-icons\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-vector-icons] F:\DaNenTang\React_Native_CLI\Dev_Mobile\node_modules\react-native-vector-icons\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.react:react-native:0.68.1] C:\Users\Admin\.gradle\caches\transforms-3\3870dbabc2a1410386e20fa69567ecf9\transformed\jetified-react-native-0.68.1\AndroidManifest.xml:5:5-7:41
