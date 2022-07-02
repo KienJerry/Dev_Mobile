@@ -408,9 +408,9 @@ const btn_Edit_Trademark = () => {
           renderItem={({item , index}) => (
             <TouchableOpacity onPress={() => Show_Alert(item)}>
             <View key={index} style={styles.flatlist}> 
-               <Text>Tên : <Text style={{color: 'green', fontWeight:'bold'}}>{item.tenthuonghieu}</Text></Text>
-               <Text>Địa Chỉ : <Text style={{color: 'green', fontWeight:'bold'}}>{item.diachithuonghieu}</Text></Text>
-               <Text>Email : <Text style={{color: 'green', fontWeight:'bold'}}>{item.email}</Text></Text>
+               <Text style={{color: "black"}}>Tên : <Text style={{color: 'green', fontWeight:'bold'}}>{item.tenthuonghieu}</Text></Text>
+               <Text style={{color: "black"}}>Địa Chỉ : <Text style={{color: 'green', fontWeight:'bold'}}>{item.diachithuonghieu}</Text></Text>
+               <Text style={{color: "black"}}>Email : <Text style={{color: 'green', fontWeight:'bold'}}>{item.email}</Text></Text>
             </View>
             </TouchableOpacity>
           )} />
@@ -521,13 +521,15 @@ const styles = StyleSheet.create({
     marginLeft: 10 , 
     fontSize:16 , 
     fontWeight: 'bold',
+    color: "black"
    },
    TextSearch:{
     backgroundColor: 'white',
     flex: 1, 
     margin : 5 , 
     borderRadius: 5, 
-    borderWidth : 1 
+    borderWidth : 1 ,
+    color: "black"
   },
   table:{
     flex: 1 , 

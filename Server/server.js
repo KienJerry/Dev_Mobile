@@ -85,8 +85,8 @@ app.post('/editdanhmucsanpham/editid', function(req, res){
   var sql = "UPDATE danhmuc SET tendanhmuc = ('"+req.body.name_category+"'), danhmuccha =('"+req.body.name_category_parent+"') where iddanhmuc = ("+req.body.myid+")";
   con.query(sql, function(err, result, fields){
     if(err) throw err;
-    if(result =='okedit'){
-      result.send('okedit');
+    if(result.affectedRows == 1){
+      res.send('ok');
     }
   });
 })
@@ -112,8 +112,8 @@ app.post('/deletedanhmucsanpham', function(req, res){
   var sql = "delete from danhmuc where iddanhmuc = ("+req.body.myid+")";
   con.query(sql, function(err, result, fields){
     if(err) throw err;
-    if(result =='okdelete'){
-      result.send('okdelete');
+    if(result.affectedRows == 1){
+      res.send('ok');
     }
   });
 })
