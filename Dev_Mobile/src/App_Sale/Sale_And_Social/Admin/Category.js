@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import RNPickerSelect from "react-native-picker-select";
 import axios from 'axios'
 
-const api = "http://192.168.17.113:3001/";
+const api = "http://10.22.211.7:3001/";
 var deviceWidth = Dimensions.get('window').width * 0.3;
 export default function DanhMuc({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);

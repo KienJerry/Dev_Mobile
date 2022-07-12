@@ -4,7 +4,7 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { SocialIcon } from 'react-native-elements';
 
-const api = "http://192.168.17.113:3001/"
+const api = "http://10.22.211.7:3001/"
 const SignUp = ({ navigation }) => {
     const [phoneNumber, setphoneNumber] = useState("");
     const [passWord, setpassWord] = useState("");

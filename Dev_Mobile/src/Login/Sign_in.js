@@ -6,7 +6,7 @@ import { SocialIcon } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const api = "http://192.168.17.113:3001/"
+const api = "http://10.22.211.7:3001/"
 const SignIn = ({ navigation }) => {
     const [passdangnhap, onChangepassdangnhap] = useState("");
     const [numberPhone, setnumberPhone] = useState("");

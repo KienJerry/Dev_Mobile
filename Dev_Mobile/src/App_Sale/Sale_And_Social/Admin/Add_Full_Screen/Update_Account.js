@@ -4,7 +4,7 @@ import axios from 'axios';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { Menu, MenuItem } from 'react-native-material-menu';
 
-const api = "http:192.168.17.113:3001/"
+const api = "http:10.22.211.7:3001/"
 var deviceWidth = Dimensions.get('window').width * 0.5;
 const UpdateAccount = ({route , navigation}) => {
     const [data , setData] = useState([]);

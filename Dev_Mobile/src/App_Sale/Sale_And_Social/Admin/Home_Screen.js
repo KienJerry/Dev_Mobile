@@ -1,8 +1,10 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { Text, View , StatusBar , StyleSheet , TouchableOpacity , Image , FlatList, Alert} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const api = "http://192.168.17.113:3001/"
+const api = "http://10.22.211.7:3001/"
+
 const Home_Admin = ({ navigation }) => {
 
   //List btn

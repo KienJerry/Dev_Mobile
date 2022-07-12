@@ -3,7 +3,7 @@ import { Text, View ,StyleSheet, TouchableOpacity , TextInput, FlatList, Modal ,
 import Icon from "react-native-vector-icons/MaterialIcons";
 import axios from 'axios'
 
-const api = "http://192.168.17.113:3001/"
+const api = "http://10.22.211.7:3001/"
 const ThuongHieu = () => {
   const [hideSearch , setHideSearch] = useState(false);
   const [showModalAdd, setshowModalAdd] = useState(false);

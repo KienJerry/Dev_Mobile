@@ -4,11 +4,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import ignoreWarnings  from 'ignore-warnings';
 import axios from 'axios';
 
-const api = "http://192.168.17.113:3001/"
+const api = "http://10.22.211.7:3001/"
 const YourApp = ({ navigation }) => {
+    
   setTimeout(() => {
     //Check lưu tài khoản
     const tokenlogin = async() => {
+
+      //API 
+      await AsyncStorage.setItem("local_API", api);
+
       const value = await AsyncStorage.getItem('luutaikhoan')
       const valueAdmin = await AsyncStorage.getItem('luutaikhoanAdmin')
       const time = new Date().toLocaleTimeString();
